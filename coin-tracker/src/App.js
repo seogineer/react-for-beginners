@@ -9,8 +9,8 @@ function App() {
 
   useEffect(() => {
     fetch("https://api.coinpaprika.com/v1/tickers")
-      .then(response => response.json())
-      .then(json => {
+      .then((response) => response.json())
+      .then((json) => {
         setCoins(json);
         setLoading(false);
         setSelected(json[0].quotes.USD.price);
@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   const handleSelect = (event) => {
-    const selectedValues = event.target.value.split(',');
+    const selectedValues = event.target.value.split(",");
     setSelected(selectedValues[0]);
     setSelectedUnit(selectedValues[1]);
   };
@@ -31,7 +31,9 @@ function App() {
   return (
     <div>
       <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
-      {loading ? <strong>Loading...</strong> : (
+      {loading ? (
+        <strong>Loading...</strong>
+      ) : (
         <select onChange={handleSelect}>
           {coins.map((coin) => (
             <option key={coin.id} value={[coin.quotes.USD.price, coin.symbol]}>
@@ -40,9 +42,11 @@ function App() {
           ))}
         </select>
       )}
-      <hr/>
-      Budgets: <input onChange={handleInput}></input> USD<br/>
-      Buyable: <span>{buyable}</span> {selectedUnit}<br/>
+      <hr />
+      Budgets: <input onChange={handleInput}></input> USD
+      <br />
+      Buyable: <span>{buyable}</span> {selectedUnit}
+      <br />
     </div>
   );
 }
